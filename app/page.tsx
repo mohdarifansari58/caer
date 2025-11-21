@@ -1,6 +1,6 @@
-import { Suspense } from 'react';
-import Main from './components/Main';
-import LoadingFallback from './components/LoadingFallback';
+import { Suspense } from "react";
+import Main from "./components/Main";
+import LoadingFallback from "./components/ui/LoadingFallback";
 
 export default function Home() {
   return (

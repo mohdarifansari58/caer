@@ -1,25 +1,26 @@
-import { Suspense } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowLeft, Calendar, User } from 'lucide-react';
-import LoadingFallback from '../../components/LoadingFallback';
+import { Suspense } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowLeft, Calendar, User } from "lucide-react";
+import LoadingFallback from "../../components/ui/LoadingFallback";
+import { PATHS } from "../../config/paths";
 
 // Mock blog data
 const blogPosts: Record<
-    string,
-    {
-        title: string;
-        content: string;
-        image: string;
-        date: string;
-        author: string;
-        category: string;
-        readTime: string;
-    }
+  string,
+  {
+    title: string;
+    content: string;
+    image: string;
+    date: string;
+    author: string;
+    category: string;
+    readTime: string;
+  }
 > = {
-    '1': {
-        title: 'Getting Started with Next.js 16',
-        content: `
+  "1": {
+    title: "Getting Started with Next.js 16",
+    content: `
       Next.js 16 brings powerful new features for building modern web applications. 
       In this comprehensive guide, we'll explore the latest improvements and best practices.
 
@@ -49,15 +50,15 @@ const blogPosts: Record<
 
       Start building amazing applications today!
     `,
-        image: '/next.svg',
-        date: 'Nov 20, 2025',
-        author: 'John Developer',
-        category: 'Tutorial',
-        readTime: '5 min read',
-    },
-    '2': {
-        title: 'Mastering Tailwind CSS',
-        content: `
+    image: "/next.svg",
+    date: "Nov 20, 2025",
+    author: "John Developer",
+    category: "Tutorial",
+    readTime: "5 min read",
+  },
+  "2": {
+    title: "Mastering Tailwind CSS",
+    content: `
       Tailwind CSS is a utility-first CSS framework that helps you build modern designs without leaving your HTML.
 
       ## What is Tailwind CSS?
@@ -81,15 +82,15 @@ const blogPosts: Record<
 
       Master Tailwind CSS and create beautiful interfaces!
     `,
-        image: '/window.svg',
-        date: 'Nov 18, 2025',
-        author: 'Jane Designer',
-        category: 'Design',
-        readTime: '7 min read',
-    },
-    '3': {
-        title: 'Dynamic Routing in Next.js',
-        content: `
+    image: "/window.svg",
+    date: "Nov 18, 2025",
+    author: "Jane Designer",
+    category: "Design",
+    readTime: "7 min read",
+  },
+  "3": {
+    title: "Dynamic Routing in Next.js",
+    content: `
       Dynamic routing is a powerful feature in Next.js that allows you to create pages with dynamic paths.
 
       ## Understanding Dynamic Routes
@@ -112,104 +113,109 @@ const blogPosts: Record<
 
       Dynamic routing enables you to build scalable applications!
     `,
-        image: '/globe.svg',
-        date: 'Nov 15, 2025',
-        author: 'Mike Developer',
-        category: 'Development',
-        readTime: '6 min read',
-    },
+    image: "/globe.svg",
+    date: "Nov 15, 2025",
+    author: "Mike Developer",
+    category: "Development",
+    readTime: "6 min read",
+  },
 };
 
 async function BlogContent({ id }: { id: string }) {
-    // Simulate data fetching
-    await new Promise((resolve) => setTimeout(resolve, 300));
+  // Simulate data fetching
+  await new Promise((resolve) => setTimeout(resolve, 300));
 
-    const post = blogPosts[id];
+  const post = blogPosts[id];
 
-    if (!post) {
-        return (
-            <div className="text-center py-12">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Post not found</h2>
-                <Link href="/blog" className="text-[#696FC7] hover:text-[#84994F] font-semibold">
-                    ← Back to Blog
-                </Link>
-            </div>
-        );
-    }
-
+  if (!post) {
     return (
-        <>
-            {/* Hero Image */}
-            <div className="relative h-96 rounded-lg overflow-hidden mb-8 shadow-lg">
-                <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                    priority
-                />
-            </div>
-
-            {/* Article Header */}
-            <div className="mb-8">
-                <div className="flex flex-wrap gap-4 items-center mb-4">
-                    <span className="px-4 py-2 bg-[#FFDBB6] text-gray-800 rounded-full text-sm font-semibold">
-                        {post.category}
-                    </span>
-                    <span className="text-gray-600 text-sm">{post.readTime}</span>
-                </div>
-
-                <h1 className="text-4xl md:text-5xl font-bold text-[#84994F] mb-6">
-                    {post.title}
-                </h1>
-
-                <div className="flex flex-col sm:flex-row gap-6 text-gray-600 border-b border-gray-200 pb-6">
-                    <div className="flex items-center gap-2">
-                        <Calendar size={18} />
-                        <span>{post.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <User size={18} />
-                        <span>{post.author}</span>
-                    </div>
-                </div>
-            </div>
-
-            {/* Article Content */}
-            <div className="prose prose-lg max-w-none mb-12">
-                <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                    {post.content}
-                </div>
-            </div>
-
-            {/* Navigation */}
-            <div className="border-t border-gray-200 pt-8">
-                <Link
-                    href="/blog"
-                    className="inline-flex items-center gap-2 text-[#696FC7] hover:text-[#84994F] font-semibold transition-colors"
-                >
-                    <ArrowLeft size={20} />
-                    Back to Blog
-                </Link>
-            </div>
-        </>
+      <div className="text-center py-12">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          Post not found
+        </h2>
+        <Link
+          href={PATHS.BLOG}
+          className="text-[#696FC7] hover:text-[#84994F] font-semibold"
+        >
+          ← Back to Blog
+        </Link>
+      </div>
     );
+  }
+
+  return (
+    <>
+      {/* Hero Image */}
+      <div className="relative h-96 rounded-lg overflow-hidden mb-8 shadow-lg">
+        <Image
+          src={post.image}
+          alt={post.title}
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* Article Header */}
+      <div className="mb-8">
+        <div className="flex flex-wrap gap-4 items-center mb-4">
+          <span className="px-4 py-2 bg-[#FFDBB6] text-gray-800 rounded-full text-sm font-semibold">
+            {post.category}
+          </span>
+          <span className="text-gray-600 text-sm">{post.readTime}</span>
+        </div>
+
+        <h1 className="text-4xl md:text-5xl font-bold text-[#84994F] mb-6">
+          {post.title}
+        </h1>
+
+        <div className="flex flex-col sm:flex-row gap-6 text-gray-600 border-b border-gray-200 pb-6">
+          <div className="flex items-center gap-2">
+            <Calendar size={18} />
+            <span>{post.date}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <User size={18} />
+            <span>{post.author}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Article Content */}
+      <div className="prose prose-lg max-w-none mb-12">
+        <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+          {post.content}
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="border-t border-gray-200 pt-8">
+        <Link
+          href={PATHS.BLOG}
+          className="inline-flex items-center gap-2 text-[#696FC7] hover:text-[#84994F] font-semibold transition-colors"
+        >
+          <ArrowLeft size={20} />
+          Back to Blog
+        </Link>
+      </div>
+    </>
+  );
 }
 
 export default function BlogPostPage({
-    params,
+  params,
 }: {
-    params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>;
 }) {
-    const { id } = params as unknown as { id: string };
+  const { id } = params as unknown as { id: string };
 
-    return (
-        <main className="min-h-screen bg-white">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <Suspense fallback={<LoadingFallback />}>
-                    <BlogContent id={id} />
-                </Suspense>
-            </div>
-        </main>
-    );
+  return (
+    <main className="min-h-screen bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <Suspense fallback={<LoadingFallback />}>
+          <BlogContent id={id} />
+        </Suspense>
+      </div>
+    </main>
+  );
 }

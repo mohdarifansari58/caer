@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { PATHS } from "../config/paths";
 
 interface BlogCardProps {
   id: string;
@@ -19,7 +20,7 @@ export default function BlogCard({
   category,
 }: BlogCardProps) {
   return (
-    <Link href={`/blog/${id}`}>
+    <Link href={PATHS.BLOG_POST(id)}>
       <article className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden cursor-pointer h-full">
         <div className="relative h-48 overflow-hidden bg-gray-200">
           <Image

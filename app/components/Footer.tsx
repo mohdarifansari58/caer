@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import Link from "next/link";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { PATHS } from "@/config/paths";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,7 +15,8 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">About CAER</h3>
             <p className="text-sm opacity-90">
-              Building amazing digital experiences with modern technologies and creative solutions.
+              Building amazing digital experiences with modern technologies and
+              creative solutions.
             </p>
           </div>
 
@@ -23,17 +25,17 @@ export default function Footer() {
             <h3 className="font-bold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/" className="hover:underline">
+                <Link href={PATHS.HOME} className="hover:underline">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:underline">
+                <Link href={PATHS.BLOG} className="hover:underline">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:underline">
+                <Link href={PATHS.ABOUT} className="hover:underline">
                   About
                 </Link>
               </li>

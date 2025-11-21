@@ -1,10 +1,19 @@
 import { Suspense } from "react";
 import Image from "next/image";
-import LoadingFallback from "../components/LoadingFallback";
+import LoadingFallback from "../components/ui/LoadingFallback";
+import AboutImage from "../assets/about.jpg";
+import User1 from "../assets/user1.jpg";
+import User2 from "../assets/user2.jpg";
+import User3 from "../assets/user3.jpg";
 
 async function AboutContent() {
   // Simulate data fetching
   await new Promise((resolve) => setTimeout(resolve, 400));
+  const members = [
+    { name: "Alice Johnson", role: "Lead Developer", image: User1 },
+    { name: "Bob Smith", role: "UI/UX Designer", image: User2 },
+    { name: "Carol White", role: "Project Manager", image: User3 },
+  ];
 
   return (
     <>
@@ -14,7 +23,7 @@ async function AboutContent() {
           About CAER
         </h1>
         <p className="text-xl text-gray-600 leading-relaxed">
-          We're a team of passionate developers and designers dedicated to
+          We&apos;re a team of passionate developers and designers dedicated to
           creating exceptional digital experiences. Our mission is to help
           businesses thrive in the digital age through innovative solutions and
           cutting-edge technology.
@@ -29,8 +38,8 @@ async function AboutContent() {
           </h2>
           <p className="text-gray-700 mb-4">
             At CAER, we believe in the power of technology to transform
-            businesses. We're committed to delivering high-quality solutions
-            that exceed expectations and drive real results.
+            businesses. We&apos;re committed to delivering high-quality
+            solutions that exceed expectations and drive real results.
           </p>
           <ul className="space-y-3">
             {[
@@ -48,10 +57,11 @@ async function AboutContent() {
         </div>
         <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
           <Image
-            src="/globe.svg"
+            src={AboutImage}
             alt="Our mission"
             fill
             className="object-cover"
+            loading="lazy"
           />
         </div>
       </div>
@@ -98,21 +108,25 @@ async function AboutContent() {
         <h2 className="text-3xl font-bold text-[#84994F] mb-8 text-center">
           Our Team
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { name: "Alice Johnson", role: "Lead Developer" },
-            { name: "Bob Smith", role: "UI/UX Designer" },
-            { name: "Carol White", role: "Project Manager" },
-          ].map((member, idx) => (
+          {members.map((member) => (
             <div
-              key={idx}
+              key={member.name}
               className="bg-white border-2 border-[#84994F] rounded-lg p-6 text-center hover:shadow-lg transition-shadow"
             >
-              <div className="w-24 h-24 bg-[#D9CFC7] rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-3xl font-bold text-[#84994F]">
-                  {member.name.charAt(0)}
-                </span>
+              {/* <-- FIXED CIRCLE IMAGE: parent is relative and has explicit size */}
+              <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-4">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className="object-cover"
+                  sizes="96px"
+                  loading="lazy"
+                />
               </div>
+
               <h3 className="text-xl font-bold text-[#84994F] mb-2">
                 {member.name}
               </h3>
